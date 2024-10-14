@@ -1,6 +1,6 @@
 # Docusaurus 2
 
-This directory is a brief example of a [Docusaurus](https://v2.docusaurus.io) site that can be deployed to Vercel with zero configuration.
+A [Docusaurus](https://v2.docusaurus.io) site deployed to Vercel.
 
 ## Deploy Your Own
 
