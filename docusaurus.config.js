@@ -6,8 +6,8 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'saffy.games',
-  tagline: 'Throne & Liberty',
+  title: 'Throne & Liberty',
+  tagline: 'We Are Spartans',
   url: 'https://tl.saffy.games',
   baseUrl: '/',
   onBrokenLinks: 'throw',
@@ -68,10 +68,7 @@ const config = {
           {
             title: 'Docs',
             items: [
-              {
-                label: 'Tutorial',
-                to: '/docs/intro',
-              },
+              
             ],
           },
           {
