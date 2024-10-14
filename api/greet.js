@@ -1,6 +1,10 @@
-// src/api/greet.js
+// api/greet.js
 
 import { get } from '@vercel/edge-config';
+
+export const config = {
+  runtime: 'edge', // this is a pre-requisite
+};
 
 export default async function handler(req, res) {
   try {
