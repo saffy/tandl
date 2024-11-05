@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { TextField } from '@mui/material';
+import FormControl from '@mui/material/FormControl';
 
 const getDateText = (date) => {
     // yyyy-MM-dd
@@ -14,13 +15,28 @@ export default function JoinDateSelect() {
 
 
     const handleChange = (event) => {
-        setDate(getDateText(new Date(event.target.value)));
+        const {
+            target: { value },
+          } = event;
+        
+          if(!value) {
+            setDate(getDateText(defaultDate));
+          } else {
+            setDate(getDateText(new Date(value)));
+          }
+        
+        console.log(value);
     }
 
     
 
   return (
-    <><TextField id="outlined-basic" label="Join Date" type="date" value={date} onChange={handleChange} variant="filled" /></>
+    <>
+    <FormControl>
+    <TextField id="joindate" required label="Join Date" type="date" value={date} onChange={handleChange} variant="filled" />
+    </FormControl>
+    
+    </>
   );
 }
 

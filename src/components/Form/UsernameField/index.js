@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { TextField } from '@mui/material';
+import FormControl from '@mui/material/FormControl';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -38,7 +39,10 @@ export default function UsernameField() {
   }, []);
 
   return (
-    <><TextField id="outlined-basic" label="Username" variant="filled" /></>
+    <> <FormControl>
+            <TextField required autoComplete='off' id="username" label="Username" variant="filled" type="text" />
+        </FormControl>
+        </>
   );
 }
 

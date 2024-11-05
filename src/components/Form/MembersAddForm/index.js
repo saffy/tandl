@@ -3,10 +3,16 @@ import React, { useState, useEffect } from 'react';
 import UsernameField from '@site/src/components/Form/UsernameField';
 import WeaponSelect from '@site/src/components/Form/WeaponSelect';
 import JoinDateSelect from '@site/src/components/Form/JoinDateSelect';
+import Button from '@mui/material/Button';
   
 export default function MembersAddForm() {
   const [loading, setLoading] = useState(true);
   const [members, setMembers] = useState([]);
+  const [formData, setFormData] = useState({
+    username: '',
+    weapons: [],
+    joinDate: '',
+    });
   
 
   useEffect(() => {
@@ -37,9 +43,11 @@ export default function MembersAddForm() {
   return (
     <><h2>Add Members</h2>
     <form>
-          <UsernameField />
-          <WeaponSelect />
-          <JoinDateSelect />
+          <UsernameField value={formData.username}/>
+          <WeaponSelect value={formData.weapons}/>
+          <JoinDateSelect value={formData.joinDate} />
+
+          <Button type="submit" variant="contained">Submit</Button>
       </form></>
   );
 }
