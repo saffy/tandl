@@ -29,32 +29,32 @@ const ITEM_PADDING_TOP = 8;
 
 export default function WeaponSelect() {
   const [weapon, setWeapon] = useState([]);
-  const [warning, setWarning] = useState(false);
+  const [error, setError] = useState(false);
 
   const handleChange = (event) => {
     const {
       target: { value },
     } = event;
     // Limit to 2 weapons
-    if(value.length <= 2) {
-        setWarning(false);
-        setWeapon(
-        // On autofill we get a stringified value.
-        typeof value === 'string' ? value.split(',') : value,
+    if(value.length == 1 ) {
+        setError(true);
+        setWeapon(typeof value === 'string' ? value.split(',') : value,
         );
-    } else {
-        console.log("warning is true");
-        setWarning(true);
+    } else if(value.length <= 2) {
+        setError(false);
+        setWeapon(typeof value === 'string' ? value.split(',') : value,
+        );
     }
-  };
+  }
 
   return (
-    <><FormControl sx={{ m: 1, width: 300 }}>
-        <InputLabel id="demo-multiple-chip-label">Weapons</InputLabel>
+    <><FormControl sx={{ width: 300 }}>
+        <InputLabel id="weapon-chip-label">Weapons
         <Select
-          labelId="demo-multiple-chip-label"
-          id="demo-multiple-chip"
+          labelId="weapon-chip-label"
+          id="weapon-chip"
           multiple
+          error={error}
           value={weapon}
           onChange={handleChange}
           input={<OutlinedInput id="select-multiple-chip" label="Weapons" />}
@@ -76,7 +76,8 @@ export default function WeaponSelect() {
             </MenuItem>
           ))}
         </Select>
-        { warning ? <div>Max 2 weapons</div> : null }
+        { error ? <div>Must provide 2 weapons</div> : null }
+        </InputLabel>
         
       </FormControl>
       
