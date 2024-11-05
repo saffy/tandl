@@ -49,12 +49,13 @@ export default function WeaponSelect() {
 
   return (
     <><FormControl sx={{ width: 300 }}>
-        <InputLabel id="weapon-chip-label">Weapons
+        <InputLabel id="weapon-chip-label" htmlFor="select-multiple-chip">Weapons</InputLabel>
         <Select
           labelId="weapon-chip-label"
           id="weapon-chip"
           multiple
           error={error}
+          sx={{ width: 300 }}
           value={weapon}
           onChange={handleChange}
           input={<OutlinedInput id="select-multiple-chip" label="Weapons" />}
@@ -77,7 +78,7 @@ export default function WeaponSelect() {
           ))}
         </Select>
         { error ? <div>Must provide 2 weapons</div> : null }
-        </InputLabel>
+        
         
       </FormControl>
       
