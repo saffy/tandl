@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
-import MembersTableRow from '@site/src/components/MembersTableRow';
+import MembersTableRow from '@site/src/components/Table/MembersTableRow';
 
 function createData(
     name,
@@ -18,31 +16,24 @@ function createData(
   ) {
     return { name, calories, fat, carbs, protein };
   }
-  
-  const rows = [
-    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    createData('Eclair', 262, 16.0, 24, 6.0),
-    createData('Cupcake', 305, 3.7, 67, 4.3),
-    createData('Gingerbread', 356, 16.0, 49, 3.9),
-  ];
 
 export default function MembersTable() {
   const [loading, setLoading] = useState(true);
+  const [members, setMembers] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch('/api/greet');
+        const response = await fetch('/api/members/members', {method:'POST'});
         if (!response.ok) {
           throw new Error(`Network response was not ok: ${response.statusText}`);
         }
         
         const data = await response.json(); // Parse JSON from response
 
-        setGreetingString(data.value);
+        setMembers(data);
       } catch (error) {
-        console.error('Error fetching greeting:', error);
+        console.error('Error fetching members:', error);
       } finally {
         setLoading(false); // Stop loading once fetch is complete
       }
@@ -63,8 +54,8 @@ export default function MembersTable() {
           <MembersTableRow isHeader={true}/>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <MembersTableRow isHeader={false} row={row} />
+          {members.map((member) => (
+            <MembersTableRow key={member.username} isHeader={false} row={member} />
           ))}
         </TableBody>
       </Table>

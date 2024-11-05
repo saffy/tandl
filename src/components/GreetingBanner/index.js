@@ -29,7 +29,7 @@ export default function GreetingBanner() {
     return <div>Loading...</div>;
   }
 
-  return (
+  return (<>
     <section>
       <div className="container">
         Hello!
@@ -42,6 +42,7 @@ export default function GreetingBanner() {
         
       </div>
     </section>
+    </>
   );
 }
 
