@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import UsernameField from '@site/src/components/Form/UsernameField';
 import WeaponSelect from '@site/src/components/Form/WeaponSelect';
 import JoinDateSelect from '@site/src/components/Form/JoinDateSelect';
+
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
   
 export default function MembersAddForm() {
@@ -36,19 +38,37 @@ export default function MembersAddForm() {
     fetchData();
   }, []);
 
+  const handleSubmit= (e) => {
+    e.preventDefault();
+    console.log(formData)
+  };
+
+  const handleInputChange = (e) => {
+    
+    const { name, value } = e.target;
+    setFormData({...formData, [name]: value});
+    };
+
   if (loading) {
     //grey out button?
   }
 
   return (
     <><h2>Add Members</h2>
-    <form>
-          <UsernameField value={formData.username}/>
-          <WeaponSelect value={formData.weapons}/>
-          <JoinDateSelect value={formData.joinDate} />
+    
+    <form onSubmit={handleSubmit}>
+    <Box component="fields" sx={{ p: 2, minHeight:200 }}>
+          <UsernameField value={formData.username} onFormChange={handleInputChange}/>
+          <WeaponSelect value={formData.weapons} onFormChange={handleInputChange}/>
+          <JoinDateSelect value={formData.joinDate} onFormChange={handleInputChange}/>
 
-          <Button type="submit" variant="contained">Submit</Button>
-      </form></>
+          
+          
+            <Button type="submit" variant="contained">Submit</Button>
+      </Box>
+      </form>
+      
+      </>
   );
 }
 

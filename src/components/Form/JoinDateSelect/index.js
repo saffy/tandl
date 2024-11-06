@@ -9,12 +9,12 @@ const getDateText = (date) => {
     return '' + date.getFullYear() + '-' + month + '-' + dayOfMonth;
 }
 
-export default function JoinDateSelect() {
+export default function JoinDateSelect({value, onFormChange}) {
     let defaultDate = new Date();
     const [date, setDate] = useState(getDateText(defaultDate));
 
-
-    const handleChange = (event) => {
+    const handleInputChange = (event) => {
+        event.preventDefault();
         const {
             target: { value },
           } = event;
@@ -25,15 +25,15 @@ export default function JoinDateSelect() {
             setDate(getDateText(new Date(value)));
           }
         
-        console.log(value);
+        // Handle remaining form changes
+        onFormChange(event);
+        
     }
-
-    
 
   return (
     <>
     <FormControl>
-    <TextField id="joindate" required label="Join Date" type="date" value={date} onChange={handleChange} variant="filled" />
+    <TextField id="joindate" name="joinDate" required label="Join Date" type="date" value={value} onChange={handleInputChange} variant="filled" />
     </FormControl>
     
     </>

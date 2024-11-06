@@ -4,6 +4,7 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
+import FormHelperText from '@mui/material/FormHelperText';
 import Select from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
 
@@ -27,7 +28,7 @@ const ITEM_PADDING_TOP = 8;
     'Greatsword',
   ];
 
-export default function WeaponSelect() {
+export default function WeaponSelect({value, onFormChange}) {
   const [weapon, setWeapon] = useState([]);
   const [error, setError] = useState(false);
 
@@ -35,7 +36,7 @@ export default function WeaponSelect() {
     const {
       target: { value },
     } = event;
-    // Limit to 2 weapons
+    // Requires exactly 2 weapons, don't allow more than 2 to be selected and don't allow 1 to be confirmed.
     if(value.length == 1 ) {
         setError(true);
         setWeapon(typeof value === 'string' ? value.split(',') : value,
@@ -44,17 +45,18 @@ export default function WeaponSelect() {
         setError(false);
         setWeapon(typeof value === 'string' ? value.split(',') : value,
         );
+        onFormChange(event);
     }
   }
 
   return (
-    <><FormControl sx={{ width: 300 }}>
+    <><FormControl sx={{ width: 300 }} error={error}>
         <InputLabel id="weapon-chip-label" htmlFor="select-multiple-chip">Weapons</InputLabel>
         <Select
           labelId="weapon-chip-label"
           id="weapon-chip"
+          name="weapons"
           multiple
-          error={error}
           sx={{ width: 300 }}
           value={weapon}
           onChange={handleChange}
@@ -77,7 +79,7 @@ export default function WeaponSelect() {
             </MenuItem>
           ))}
         </Select>
-        { error ? <div>Must provide 2 weapons</div> : null }
+        { error ? <FormHelperText>Must select 2 weapons</FormHelperText> : null }
         
         
       </FormControl>
